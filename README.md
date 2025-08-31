@@ -24,7 +24,7 @@ Account Security: Securely change your password to protect your data.
 Technical Details
 MedReach is powered by a robust backend, with a clearly defined database schema that ensures data integrity and scalability.
 
-Database Schema
+Database Schema:
 The project uses a database named medDB with the following key tables:
 
 doctor: Stores all doctor information (name, specialization, contact, email).
