@@ -26,8 +26,11 @@ MedReach is powered by a robust backend, with a clearly defined database schema 
 
 Database Schema
 The project uses a database named medDB with the following key tables:
+
 doctor: Stores all doctor information (name, specialization, contact, email).
+
 patient: Holds patient data (name, contact, address, email).
+
 appointments: Manages all appointment details, including patient and doctor IDs, date, time, and status.
 prescriptions: Records all prescriptions, linked to specific appointments and doctors.
 
