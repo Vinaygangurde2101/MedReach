@@ -1,0 +1,98 @@
+<%@page import="com.vinay.meth.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.time.LocalDate" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Appointment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      color: white;
+    }
+
+    .form-container {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      width: 350px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #00ffff;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #00ffff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #000;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #00c2c2;
+    }
+  </style>
+</head>
+<body>
+
+  <%
+    String doctorId = request.getParameter("did");
+    String pid = User.getPid(); 
+    LocalDate today = LocalDate.now(); 
+  %>
+
+  <div class="form-container">
+    <h2>Book Appointment</h2>
+
+    <form action="BookAppointment" method="post">
+      <label for="pid">Patient ID</label>
+      <input type="text" id="pid" name="pid" value = "<%= pid %>" readonly>
+
+      <label for="did">Doctor ID</label>
+      <input type="text" id="did" name="did" value="<%= doctorId %>" readonly>
+
+      <label for="adate">Date of Appointment</label>
+      <input type="date" id="adate" name="adate" value="<%= today.toString() %>" required>
+
+      <label for="atime">Time of Appointment</label>
+      <input type="time" id="atime" name="atime" required>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+</body>
+</html>

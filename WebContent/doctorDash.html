@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor's Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #0a0f1f, #0b1c2b);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dashboard {
+      width: 420px;
+      padding: 40px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .dashboard h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #00fff7;
+      border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+      padding-bottom: 10px;
+    }
+
+    .dashboard a {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #00fff7, #008cff);
+      color: #0a0f1f;
+      text-align: center;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
+    }
+
+    .dashboard a:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 255, 255, 0.4);
+    }
+
+    .bg-icon {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      opacity: 0.03;
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+
+    .bg-icon:nth-child(1) {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/3774/3774299.png');
+      top: 10%;
+      left: 5%;
+      animation-delay: 1s;
+    }
+
+    .bg-icon:nth-child(2) {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/9016/9016836.png');
+      bottom: 10%;
+      right: 8%;
+      animation-delay: 3s;
+    }
+
+    .bg-icon:nth-child(3) {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/2965/2965567.png');
+      top: 50%;
+      left: 70%;
+      animation-delay: 5s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-20px) rotate(20deg); }
+    }
+
+    @media screen and (max-width: 480px) {
+      .dashboard {
+        width: 90%;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Medical Background Icons -->
+  <div class="bg-icon"></div>
+  <div class="bg-icon"></div>
+  <div class="bg-icon"></div>
+
+  <!-- Doctor's Dashboard -->
+  <div class="dashboard">
+    <h1>Doctor's Dashboard</h1>
+    <a href="viewAppoDoctor.jsp">🗓️ View Appointments</a>
+    <a href="addpresc.html">💊 Add Prescriptions</a>
+    <a href="changePass.html">🔒 Change Password</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MedReach - Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0e141b, #1b2735);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .sidebar h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      color: #00ffe7;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      margin: 10px 0;
+      text-decoration: none;
+      color: #e0e0e0;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #00ffe7;
+    }
+
+    .nav-link i {
+      font-size: 16px;
+    }
+
+    .main {
+      flex: 1;
+      padding: 60px 40px;
+      position: relative;
+    }
+
+    .main h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #ffffff;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+
+    .card i {
+      font-size: 28px;
+      margin-bottom: 12px;
+      color: #00ffe7;
+    }
+
+    .card a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .logout-btn {
+      position: absolute;
+      bottom: 40px;
+      left: 20px;
+      right: 20px;
+      background: #ff4d6d;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: #ff1f4c;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main {
+        padding: 40px 20px;
+      }
+      .main h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="sidebar">
+    <h2>MedReach</h2>
+    <a class="nav-link" href="adminLogin.html"><i class="fas fa-user-shield"></i> Admin Login</a>
+    <a class="nav-link" href="doctorsLogin.html"><i class="fas fa-user-md"></i> Doctor Login</a>
+    <a class="nav-link" href="patientLogin.html"><i class="fas fa-user-injured"></i> Patient Login</a>
+    <button class="logout-btn" onclick="location.href='index.html'">
+      <i class="fas fa-sign-out-alt"></i> Log Out
+    </button>
+  </div>
+
+  
+  <div class="main">
+    <h1>Welcome to MedReach Dashboard</h1>
+    <div class="dashboard-grid">
+      <div class="card">
+        <i class="fas fa-user-shield"></i>
+        <a href="adminLogin.html">Admin Login</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-user-md"></i>
+        <a href="doctorsLogin.html">Doctor Login</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-user-injured"></i>
+        <a href="patientLogin.html">Patient Login</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

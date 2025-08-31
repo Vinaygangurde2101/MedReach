@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | Task Reminder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #0f172a, #1e293b);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .blob1 {
+      background: #3b82f6;
+      width: 350px;
+      height: 350px;
+      top: -80px;
+      right: -100px;
+    }
+
+    .blob2 {
+      background: #06b6d4;
+      width: 300px;
+      height: 300px;
+      bottom: -100px;
+      left: -80px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      z-index: 1;
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #06b6d4;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      font-size: 14px;
+      text-align: center;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      border: 1px solid #475569;
+      background-color: #0f172a;
+      color: white;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #06b6d4;
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #06b6d4, #3b82f6);
+      font-weight: bold;
+      font-size: 15px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #3b82f6, #06b6d4);
+      transform: scale(1.03);
+    }
+
+    .login-link {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    .login-link a {
+      color: #06b6d4;
+      text-decoration: underline;
+    }
+
+    .icon {
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+
+  <div class="container">
+    <div class="icon">👤</div>
+    <h2>Create Your Account</h2>
+    <p class="subtitle">Set tasks. Track goals. Own your day! 🚀</p>
+    <form action="PatientRegister" method="post">
+      <label>👤 Full Name</label>
+      <input type="text" name="pname" placeholder="Enter Your Name" required>
+
+      <label>📱 Contact No</label>
+      <input type="tel" name="pcontact" placeholder="Enter Your Mobile Number" required>
+      
+      <label>📱 Addresso</label>
+      <input type="text" name="paddress" placeholder="Enter Your Mobile Number" required>
+      
+      <label>📧 Email</label>
+      <input type="email" name="pemail" placeholder="you@example.com" required>
+
+      <label>🔐 Password</label>
+      <input type="password" name="ppassword" placeholder="Create a strong password" required>
+
+      <button type="submit">Register</button>
+    </form>
+    <p class="login-link">Already registered? <a href="index.html">Login</a></p>
+  </div>
+</body>
+</html>

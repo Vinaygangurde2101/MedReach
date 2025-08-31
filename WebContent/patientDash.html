@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient's Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #0b1c2c, #05070c);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dashboard {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 1;
+      position: relative;
+    }
+
+    .dashboard h1 {
+      font-size: 2rem;
+      color: #00f7ff;
+      margin-bottom: 30px;
+      border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+      padding-bottom: 10px;
+    }
+
+    .dashboard a {
+      display: block;
+      margin: 15px 0;
+      padding: 14px;
+      text-decoration: none;
+      color: #000;
+      background: linear-gradient(135deg, #00ffe0, #00aaff);
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .dashboard a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
+    }
+
+    .bg-icon {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.02;
+      animation: float 10s ease-in-out infinite alternate;
+    }
+
+    .bg-icon:nth-child(1) {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/2965/2965567.png');
+      top: 8%;
+      left: 5%;
+    }
+
+    .bg-icon:nth-child(2) {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/3774/3774299.png');
+      bottom: 10%;
+      right: 10%;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating medical icons -->
+  <div class="bg-icon"></div>
+  <div class="bg-icon"></div>
+
+  <!-- Patient's Dashboard -->
+  <div class="dashboard">
+    <h1>Patient's Dashboard</h1>
+    <a href="bookAppointment.html">📅 Book Appointment</a>
+     <a href="bookAppointment1.jsp">📄 View All Doctors</a>
+    <a href="viewPresc.jsp">💊 View Prescription</a>
+    <a href="viewAppointments.jsp">📄 View Appointment</a>
+    <a href="changePassPat.html">🔒 Change Password</a>
+  </div>
+
+</body>
+</html>

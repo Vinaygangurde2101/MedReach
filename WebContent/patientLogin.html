@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedReach - Admin Login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --teal: #00e5d4;
+            --pink: #ff7eb9;
+            --white: #f5f7fa;
+            --dark-blue: #041c32;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, #04293A 100%);
+            color: var(--white);
+            overflow-x: hidden;
+            height: 100vh;
+            perspective: 1000px;
+        }
+        
+        .ecg-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .ecg-path {
+            stroke: var(--teal);
+            stroke-width: 2;
+            fill: none;
+            filter: drop-shadow(0 0 5px var(--teal));
+        }
+        
+        .background-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .medical-icon {
+            position: absolute;
+            opacity: 0.1;
+            filter: drop-shadow(0 0 10px var(--teal));
+            transition: transform 0.5s ease;
+        }
+        
+        .dna-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 100px;
+            z-index: 5;
+            pointer-events: none;
+        }
+        
+        .dna-strand {
+            position: relative;
+            width: 150px;
+            height: 300px;
+            opacity: 0.7;
+        }
+        
+        #dna1 {
+            margin-left: -50px;
+        }
+        
+        #dna2 {
+            margin-right: -50px;
+        }
+        
+        .dna-node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--teal);
+            border-radius: 50%;
+            filter: drop-shadow(0 0 3px var(--teal));
+        }
+        
+        .dna-connector {
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .holographic-chamber {
+            position: absolute;
+            width: 300px;
+            height: 500px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            margin-left: 180px;
+            border: 2px solid var(--teal);
+            border-radius: 20px;
+            box-shadow: 0 0 30px var(--teal), inset 0 0 30px var(--teal);
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        .avatar-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 25%;
+            align-items: center;
+            z-index: 2;
+        }
+        
+        .avatar-clone {
+            position: absolute;
+            width: 120px;
+            height: 200px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: drop-shadow(0 0 10px var(--pink)) brightness(0.8);
+            opacity: 0;
+            z-index: 2;
+        }
+        .login-container {
+            position: absolute;
+            width: 350px;
+            background: rgba(4, 28, 50, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 229, 212, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 229, 212, 0.2);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            opacity: 1;
+        }
+        
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--teal);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            color: var(--white);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-bottom: 2px solid var(--teal);
+            box-shadow: 0 10px 20px -10px rgba(0, 229, 212, 0.3);
+        }
+        
+        .input-group label {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .input-group input:focus + label,
+        .input-group input:valid + label {
+            top: -20px;
+            left: 0;
+            font-size: 12px;
+            color: var(--teal);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%);
+            border: none;
+            border-radius: 5px;
+            color: var(--white);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--pink);
+        }
+        
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink) 0%, var(--teal) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .login-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+        
+        .forgot-password a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password a:hover {
+            color: var(--teal);
+        }
+        
+        .pulse-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .pulse {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--teal);
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(5px);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ecg-line">
+        <svg width="100%" height="60">
+            <path class="ecg-path" d="M0,30 L50,30 L60,10 L70,50 L80,30 L130,30 L140,10 L150,50 L160,30 L210,30 L220,10 L230,50 L240,30 L290,30 L300,10 L310,50 L320,30 L370,30 L380,10 L390,50 L400,30 L450,30 L460,10 L470,50 L480,30" />
+        </svg>
+    </div>
+    
+    <div class="background-icons">
+        <img class="medical-icon" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cfb5281d-32fd-48f5-a12c-846d886f601d.png" alt="Floating stethoscope icon" style="top: 20%; left: 15%;">
+        <img class="medical-icon" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/894845b7-06ef-4765-b855-988fcec90103.png" alt="Floating first aid kit icon" style="top: 30%; left: 75%;">
+        <img class="medical-icon" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d773386a-2df1-4ab8-a823-ec5041a2c118.png" alt="Floating pill bottle icon" style="top: 70%; left: 20%;">
+        <img class="medical-icon" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/386b355b-85f6-40aa-a6b4-e5d0dfec1f75.png" alt="Floating heart rate monitor icon" style="top: 80%; left: 65%;">
+    </div>
+    
+    <div class="dna-container">
+        <div id="dna1" class="dna-strand"></div>
+        <div id="dna2" class="dna-strand"></div>
+    </div>
+    
+    <div class="holographic-chamber"></div>
+    
+    <div class="avatar-container">
+        <div id="doctor" class="doctor-avatar"></div>
+    </div>
+    
+    <div class="login-container" id="loginForm">
+        <div class="pulse-effect"></div>
+        <h2>MedReach PORTAL</h2>
+        <form action="PatientLog" method="post">
+            <div class="input-group">
+                <input type="email" id="email" name="pemail" required>
+                <label for="username">Username</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="ppassword" required>
+                <label for="password">Password</label>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+            <br>
+             <p>Don't have an account? <a href="patientReg.html">Register here</a></p>
+
+        </form>
+    </div>
+    
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        function createDNA(elementId, nodeColor) {
+            const dna = document.getElementById(elementId);
+            const nodeCount = 15;
+            const radius = 80;
+            
+            for (let i = 0; i < nodeCount; i++) {
+                const angle = (i / nodeCount) * Math.PI * 2;
+                const x = radius * Math.cos(angle);
+                const y = (i * 25) - (nodeCount * 12.5);
+                
+                // Create node
+                const node = document.createElement('div');
+                node.className = 'dna-node';
+                node.style.left = `calc(50% + ${x}px)`;
+                node.style.top = `calc(50% + ${y}px)`;
+                node.style.backgroundColor = nodeColor;
+                dna.appendChild(node);
+                
+                // Create opposite node
+                const nodeOpposite = document.createElement('div');
+                nodeOpposite.className = 'dna-node';
+                nodeOpposite.style.left = `calc(50% + ${-x}px)`;
+                nodeOpposite.style.top = `calc(50% + ${y}px)`;
+                nodeOpposite.style.backgroundColor = nodeColor;
+                dna.appendChild(nodeOpposite);
+                
+                // Create connectors
+                if (i > 0) {
+                    const connector1 = document.createElement('div');
+                    connector1.className = 'dna-connector';
+                    connector1.style.height = '25px';
+                    connector1.style.left = `calc(50% + ${x}px - 1px)`;
+                    connector1.style.top = `calc(50% + ${y - 12.5}px)`;
+                    dna.appendChild(connector1);
+                    
+                    const connector2 = document.createElement('div');
+                    connector2.className = 'dna-connector';
+                    connector2.style.height = '25px';
+                    connector2.style.left = `calc(50% + ${-x}px - 1px)`;
+                    connector2.style.top = `calc(50% + ${y - 12.5}px)`;
+                    dna.appendChild(connector2);
+                    
+                    const connector3 = document.createElement('div');
+                    connector3.className = 'dna-connector';
+                    connector3.style.width = `${Math.abs(x * 2)}px`;
+                    connector3.style.left = `calc(50% + ${-x}px)`;
+                    connector3.style.top = `calc(50% + ${y - 12.5}px)`;
+                    connector3.style.transform = 'rotate(90deg)';
+                    dna.appendChild(connector3);
+                }
+            }
+        }
+        
+        createDNA('dna1', 'var(--teal)');
+        createDNA('dna2', 'var(--pink)');
+        
+        // Animation timeline
+        const tl = gsap.timeline();
+        tl.from('.ecg-path', {
+            drawSVG: "0%",
+            duration: 2,
+            ease: "none"
+        });
+        tl.from('.medical-icon', {
+            duration: 3,
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            ease: "power2.out"
+        }, "-=1.5");
+        
+        
+        gsap.to('#dna1', {
+            rotation: 360,
+            duration: 120,
+            repeat: -1,
+            ease: "none"
+        });
+        
+        gsap.to('#dna2', {
+            rotation: -360,
+            duration: 180,
+            repeat: -1,
+            ease: "none"
+        });
+        
+       
+        gsap.to('.medical-icon', {
+            y: 20,
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            stagger: 0.5
+        });
+        
+       
+        tl.from('#doctor', {
+            duration: 1.5,
+            opacity: 0,
+            scale: 0.8,
+            ease: "back.out"
+        });
+        
+        
+        for (let i = 0; i < 3; i++) {
+            const clone = document.createElement('div');
+            clone.className = 'avatar-clone';
+            document.querySelector('.avatar-container').appendChild(clone);
+            
+            tl.to(clone, {
+                duration: 0.5,
+                opacity: 0.5,
+                scale: 1.1,
+                delay: i * 1.5,
+                ease: "power1.out"
+            })
+            .to(clone, {
+                duration: 1,
+                x: '-=100',
+                opacity: 0,
+                ease: "power1.in"
+            }, "+=0.5");
+        }
+        
+        
+        tl.to('.holographic-chamber', {
+            duration: 1,
+            opacity: 0.3,
+            scale: 1.05,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        }, "-=1");
+        
+       
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                gsap.to(input, {
+                    duration: 0.3,
+                    boxShadow: '0 10px 20px -10px rgba(0, 229, 212, 0.5)',
+                    borderBottomColor: 'var(--teal)',
+                    ease: "power1.out"
+                });
+            });
+            
+            input.addEventListener('blur', () => {
+                gsap.to(input, {
+                    duration: 0.3,
+                    boxShadow: 'none',
+                    borderBottomColor: 'transparent',
+                    ease: "power1.out"
+                });
+            });
+        });
+        setInterval(() => {
+            const pulse = document.createElement('div');
+            pulse.className = 'pulse';
+            pulse.style.left = `${Math.random() * 100}%`;
+            pulse.style.top = `${Math.random() * 100}%`;
+            
+            document.querySelector('.pulse-effect').appendChild(pulse);
+            
+            gsap.to(pulse, {
+                duration: 2,
+                width: 200,
+                height: 200,
+                opacity: 0.2,
+                ease: "power2.out",
+                onComplete: () => {
+                    pulse.remove();
+                }
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
